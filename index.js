@@ -12,7 +12,7 @@ var router = require('koa-router')();
 var app = koa();
 
 router.get('/', function *(next) {
-	this.body = 'hello world';
+	this.body = 'hello';
 });
 
 app.use(logger());

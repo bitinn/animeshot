@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "local": "NODE_ENV=local node index.js",
-    "dev": "NODE_ENV=dev nodemon --ext js --watch components/ --watch index.js index.js"
+    "dev": "NODE_ENV=dev nodemon --ext js index.js"
   },
   "repository": {
     "type": "git",
