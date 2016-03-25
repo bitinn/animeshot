@@ -4,7 +4,9 @@
   "description": "An open and searchable image repository in Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "local": "NODE_ENV=local node index.js",
+    "dev": "NODE_ENV=dev nodemon --ext js --watch components/ --watch index.js index.js"
   },
   "repository": {
     "type": "git",
