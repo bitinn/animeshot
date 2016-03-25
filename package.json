@@ -1,0 +1,36 @@
+{
+  "name": "animeshot",
+  "version": "1.0.0",
+  "description": "An open and searchable image repository in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitinn/animeshot.git"
+  },
+  "author": "David Frank",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitinn/animeshot/issues"
+  },
+  "homepage": "https://github.com/bitinn/animeshot#readme",
+  "dependencies": {
+    "cuid": "^1.3.8",
+    "grant-koa": "^3.5.5",
+    "koa": "^1.2.0",
+    "koa-logger": "^1.3.0",
+    "koa-router": "^5.4.0",
+    "koa-session": "^3.3.1",
+    "purest": "^2.0.1",
+    "redis": "^2.5.3",
+    "sharp": "^0.13.1",
+    "then-redis": "^2.0.0",
+    "xss-filters": "^1.2.6",
+    "yieldb": "^2.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}
