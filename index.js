@@ -9,11 +9,15 @@ var koa = require('koa')
 var logger = require('koa-logger')
 var router = require('koa-router')()
 var static = require('koa-static')
+var templateLoader = require('./templates/marko-template-loader')
+var homeTemplate = templateLoader('./main.marko')
 
 var app = koa()
 
 router.get('/', function *(next) {
-	this.body = 'hello';
+	this.body = homeTemplate.renderSync({
+		name: 'David Frank'
+	})
 })
 
 app.use(logger())
