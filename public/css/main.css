@@ -1,0 +1,22 @@
+
+.main-upload {
+	padding: 2em;
+}
+
+.main-search {
+	padding: 2em;
+}
+
+.dropzone {
+	border: 2px solid #bfbabe;
+	border-radius: 8px;
+	background-color: #fef9f7;
+}
+
+@media screen and (min-width: 700px) {
+	.main-upload, .main-search {
+		float: left;
+		width: 50%;
+		box-sizing: border-box;
+	}
+}
