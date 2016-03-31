@@ -2,21 +2,30 @@
 html lang="zh-cn"
 	head
 		title - 测试页面
-		link rel="stylesheet" media="all" href="/css/normalize.css"
+		link rel="stylesheet" media="all" href="/css/kube.css"
 		link rel="stylesheet" media="all" href="/css/dropzone.css"
 		link rel="stylesheet" media="all" href="/css/main.css"
 		script src="/js/dropzone.js"
 		script src="/js/domtastic.js"
 		script src="/js/main.js"
 	body
-		div class="main-upload"
-			form action="/api/files" method="post" enctype="multipart/form-data" class="dropzone" id="upload-dropzone"
-				div class="fallback"
-					input name="file" type="file"
-					button type="submit" - 上传
-			div class="upload-shot" id="upload-shot"
-		div class="main-search"
-			form action="/search"
-				div class="search-box"
-					input type="search" name="q" value
-					button type="submit" - 搜索
+		blocks cols="2" class="header"
+			div class="header-title"
+				h1 - AnimeShot
+		blocks cols="2" class="main"
+			div class="main-search"
+				form action="/search" class="forms"
+					section
+						label for="search-field" - 搜索图片
+						input type="search" name="q" id="search-field" value
+					section
+						button type="submit" - 出击吧，搜索君！
+			div class="main-upload"
+				form action="/api/files" method="post" enctype="multipart/form-data" class="dropzone forms" id="upload-dropzone"
+					div class="fallback"
+						section
+							label for="upload-field" - 上传图片
+							input type="file" name="file" id="upload-field"
+						section
+							button type="submit" - 为人民服务！
+				div class="upload-shot" id="upload-shot"

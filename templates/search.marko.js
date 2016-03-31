@@ -7,7 +7,7 @@ function create(__helpers) {
       escapeXmlAttr = __helpers.xa;
 
   return function render(data, out) {
-    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>搜索结果</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/normalize.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"></head><body><div class=\"main-search\"><ul class=\"search-results\">");
+    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>搜索结果</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"></head><body><div class=\"main-search\"><ul class=\"search-results\">");
 
     forEach(data.shots, function(shot) {
       out.w("<li class=\"result-preview\"><a href=\"shots/" +

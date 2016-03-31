@@ -1,4 +1,21 @@
 
+.header, .main {
+	margin: 2em;
+}
+
+.dropzone {
+	border: 1px solid #dfdfdf;
+	border-radius: 2px;
+}
+
+@media screen and (min-width: 800px) {
+	.header, .main {
+		max-width: 760px;
+		margin: 2em auto;
+	}
+}
+
+/*
 .main-upload, .main-search, .main-shot {
 	padding: 2em;
 }
@@ -38,3 +55,4 @@
 		box-sizing: border-box;
 	}
 }
+*/

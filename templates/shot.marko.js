@@ -9,7 +9,7 @@ function create(__helpers) {
   return function render(data, out) {
     out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>" +
       escapeXml(data.text) +
-      "</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/normalize.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"></head><body><div class=\"main-shot\">");
+      "</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"></head><body><div class=\"main-shot\">");
 
     forEach(data.size, function(size) {
       out.w("<div class=\"shot-preview\"><img src=\"/upload/" +
