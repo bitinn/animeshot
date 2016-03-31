@@ -10,21 +10,11 @@ html lang="zh-cn"
 		script src="/js/fetch.js"
 		script src="/js/form-serialize.js"
 		script src="/js/main.js"
+		include('${data.analytics}')
 	body
-		blocks cols="2" class="header"
-			div class="header-title"
-				h1
-					a href="/" - AnimeShot
-			div class="header-description"
-				p - 本站仅收集「吐槽向动画字幕截图」，用于广大群众的搜索与吐槽之需。非动画字幕的截图请不要上传，会被管理员删除。
+		include('${data.header}')
 		blocks cols="2" class="main"
-			div class="main-search"
-				form action="/search" class="forms"
-					section
-						label for="search-field" - 搜索图片文字
-						input type="search" name="q" id="search-field" value
-					section
-						button type="submit" - 出击吧，搜索君！
+			include('${data.searchBox}')
 			div class="main-upload"
 				form action="/api/files" method="post" enctype="multipart/form-data" class="dropzone forms" id="upload-dropzone"
 					div class="fallback"
@@ -43,3 +33,6 @@ html lang="zh-cn"
 						p - ${shot.text}
 						cite
 							a href="shots/${shot.sid}" - 链接
+			div
+				p
+					a href="/recent" class="btn" - 更多近期上传

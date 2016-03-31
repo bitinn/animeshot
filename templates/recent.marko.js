@@ -17,7 +17,7 @@ function create(__helpers) {
 
     out.w("<blocks cols=\"2\" class=\"main\">");
 
-    data.searchBox.render(data, out);
+    data.searchBox.render({}, out);
 
     out.w("</blocks><blocks cols=\"2\" class=\"main\">");
 

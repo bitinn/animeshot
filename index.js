@@ -25,6 +25,10 @@ var templateLoader = require('./templates/marko-template-loader')
 var homeTemplate = templateLoader('./home.marko')
 var shotTemplate = templateLoader('./shot.marko')
 var searchTemplate = templateLoader('./search.marko')
+var recentTemplate = templateLoader('./recent.marko')
+var analyticsTemplate = templateLoader('./analytics.marko')
+var headerTemplate = templateLoader('./header.marko')
+var searchBoxTemplate = templateLoader('./search-box.marko')
 
 var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
@@ -87,6 +91,9 @@ router.get('/', function *(next) {
 	var result = yield Shots.find().sort({ created: -1 }).limit(4)
 	var data = {
 		shots: result
+		, analytics: analyticsTemplate
+		, header: headerTemplate
+		, searchBox: searchBoxTemplate
 	}
 	this.body = homeTemplate.renderSync(data)
 })
@@ -102,6 +109,9 @@ router.get('/shots/:id', function *(next) {
 		, sid: shot.sid
 		, size: ['300', '600', '1200']
 		, domain: siteDomain
+		, analytics: analyticsTemplate
+		, header: headerTemplate
+		, searchBox: searchBoxTemplate
 	}
 	this.body = shotTemplate.renderSync(data)
 })
@@ -122,8 +132,26 @@ router.get('/search', function *(next) {
 	var data = {
 		shots: result
 		, q: this.query.q
+		, analytics: analyticsTemplate
+		, header: headerTemplate
+		, searchBox: searchBoxTemplate
 	}
 	this.body = searchTemplate.renderSync(data)
+})
+
+// recent page
+router.get('/recent', function *(next) {
+	yield next
+	var db = this.db
+	var Shots = db.col('shots')
+	var result = yield Shots.find().sort({ created: -1 }).limit(20)
+	var data = {
+		shots: result
+		, analytics: analyticsTemplate
+		, header: headerTemplate
+		, searchBox: searchBoxTemplate
+	}
+	this.body = recentTemplate.renderSync(data)
 })
 
 // file upload

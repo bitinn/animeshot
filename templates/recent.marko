@@ -8,7 +8,7 @@ html lang="zh-cn"
 	body
 		include('${data.header}')
 		blocks cols="2" class="main"
-			include('${data.searchBox}', data)
+			include('${data.searchBox}')
 		blocks cols="2" class="main"
 			for(shot in data.shots)
 				div class="main-preview"

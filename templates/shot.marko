@@ -4,19 +4,11 @@ html lang="zh-cn"
 		title - AnimeShot / ${data.text}
 		link rel="stylesheet" media="all" href="/css/kube.css"
 		link rel="stylesheet" media="all" href="/css/main.css"
+		include('${data.analytics}')
 	body
-		blocks cols="2" class="header"
-			div class="header-title"
-				h1
-					a href="/" - AnimeShot
+		include('${data.header}')
 		blocks cols="2" class="main"
-			div class="main-search"
-				form action="/search" class="forms"
-					section
-						label for="search-field" - 搜索图片文字
-						input type="search" name="q" id="search-field" value
-					section
-						button type="submit" - 出击吧，搜索君！
+			include('${data.searchBox}')
 		blocks cols="2" class="main"
 			div
 				h2 - 文字内容
