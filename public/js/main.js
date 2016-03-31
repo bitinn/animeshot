@@ -27,9 +27,29 @@ $(document).ready(function() {
 		$('#upload-shot').append('<form method="post" action="/api/shots" class="forms" id="' + outer + '"></form>')
 		$('#' + outer).append('<input type="hidden" name="hash" value="' + id + '">')
 		$('#' + outer).append('<section id="' + inner1 + '"></section>')
-		$('#' + inner1).append('<label for="' + name + '-text">请输入字幕文字，以便搜索</label>')
+		$('#' + inner1).append('<label for="' + name + '-text" id="' + name + '-label">请输入字幕文字，以便搜索</label>')
 		$('#' + inner1).append('<input type="text" name="text" id="' + name + '-text" value="">')
 		$('#' + outer).append('<section id="' + inner2 + '"></section>')
-		$('#' + inner2).append('<button type="submit">分享</button>')
+		$('#' + inner2).append('<button type="submit" id="' + name + '-submit">分享</button>')
+
+		$('#' + outer).on('submit', function(ev) {
+			ev.preventDefault()
+
+			fetch(ev.target.action, {
+				method: 'post'
+				, body: window.formSerialize(ev.target)
+				, headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}).then(function(res) {
+				return res.text()
+			}).then(function(text) {
+				$('#' + name + '-label').html('成功添加')
+				$('#' + name + '-text').addClass('input-success')
+				$('#' + name + '-submit').attr('disabled', 'disabled')
+			}).catch(function(err) {
+				console.log(err)
+			})
+		})
 	})
 })
