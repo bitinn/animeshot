@@ -8,7 +8,7 @@ function create(__helpers) {
       escapeXmlAttr = __helpers.xa;
 
   return function render(data, out) {
-    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>搜索结果</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"></head><body><blocks cols=\"2\" class=\"header\"><div class=\"header-title\"><h1><a href=\"/\">AnimeShot</a></h1></div></blocks><blocks cols=\"2\" class=\"main\"><div class=\"main-search\"><form action=\"/search\" class=\"forms\"><section><label for=\"search-field\">搜索图片</label><input type=\"search\" name=\"q\" id=\"search-field\"" +
+    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>AnimeShot / 搜索结果</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"></head><body><blocks cols=\"2\" class=\"header\"><div class=\"header-title\"><h1><a href=\"/\">AnimeShot</a></h1></div></blocks><blocks cols=\"2\" class=\"main\"><div class=\"main-search\"><form action=\"/search\" class=\"forms\"><section><label for=\"search-field\">搜索图片</label><input type=\"search\" name=\"q\" id=\"search-field\"" +
       attr("value", data.q) +
       "></section><section><button type=\"submit\">出击吧，搜索君！</button></section></form></div></blocks><blocks cols=\"2\" class=\"main\">");
 

@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 html lang="zh-cn"
 	head
-		title - ${data.text}
+		title - AnimeShot / ${data.text}
 		link rel="stylesheet" media="all" href="/css/kube.css"
 		link rel="stylesheet" media="all" href="/css/main.css"
 	body
-		div class="main-shot"
+		blocks cols="2" class="header"
+			div class="header-title"
+				h1
+					a href="/" - AnimeShot
+		blocks cols="2" class="main"
+			div class="main-search"
+				form action="/search" class="forms"
+					section
+						label for="search-field" - 搜索图片
+						input type="search" name="q" id="search-field" value
+					section
+						button type="submit" - 出击吧，搜索君！
+		blocks cols="2" class="main"
+			div
+				p
+					a href="/shots/${data.sid}" - ${data.text}
+		blocks cols="2" class="main"
 			for(size in data.size)
-				div class="shot-preview"
-					img src="/upload/${data.sid}.${size}.jpg" alt="${size}px" class="shot-preview-image"
-					p class="shot-preview-text" - ${size}px
-					input type="text" value="${data.domain}/upload/${data.sid}.${size}.jpg" class="shot-preview-url"
+				div class="main-preview"
+					a href="${data.domain}/upload/${data.sid}.${size}.jpg" class="preview-image"
+						img src="/upload/${data.sid}.${size}.jpg" alt="${size}px"
+				div class="main-preview"
+					p class="bold" - ${size}px
+					a href="${data.domain}/upload/${data.sid}.${size}.jpg" class="smaller" - ${data.domain}/upload/${data.sid}.${size}.jpg
