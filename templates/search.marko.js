@@ -17,7 +17,7 @@ function create(__helpers) {
         escapeXmlAttr(shot.sid) +
         "\" class=\"preview-image\"><img src=\"/upload/" +
         escapeXmlAttr(shot.sid) +
-        ".600.jpg\" alt=\"600px\"></a><blockquote class=\"preview-quote\"><p>" +
+        ".300.jpg\" alt=\"300px\"></a><blockquote class=\"preview-quote\"><p>" +
         escapeXml(shot.text) +
         "</p><cite><a href=\"shots/" +
         escapeXmlAttr(shot.sid) +
