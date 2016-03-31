@@ -10,8 +10,10 @@
 var fs = require('mz/fs')
 var cuid = require('cuid')
 var sharp = require('sharp')
+var mime = require('mime-types')
 var busboy = require('co-busboy')
-var mongo = require('yieldb').connect;
+var mongo = require('yieldb').connect
+var escapeString = require('escape-string-regexp')
 
 var koa = require('koa')
 var logger = require('koa-logger')
@@ -109,11 +111,14 @@ router.get('/search', function *(next) {
 	yield next
 	var db = this.db
 	var Shots = db.col('shots')
-	var result = yield Shots.find({
-		text: {
-			$regex: new RegExp('(.*)' + this.query.q + '(.*)', 'i')
-		}
-	})
+	var result
+	if (this.query.q.length > 0 && this.query.q.length < 100) {
+		result = yield Shots.find({
+			text: {
+				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+			}
+		})
+	}
 	var data = {
 		shots: result
 		, q: this.query.q
@@ -124,13 +129,20 @@ router.get('/search', function *(next) {
 // file upload
 router.post('/api/files', function *(next) {
 	yield next
+	var headers = this.headers
 	var body = busboy(this, {
 		autoFields: true
+		, checkFile: function (fn, file, name, enc, mime) {
+			var ext = mime.extension(mime)
+			if (ext !== 'jpg' && ext !== 'png') {
+				return new Error('file type not supported')
+			}
+		}
 	})
 	var part, p1, p2, p3, hash, s1
 	while (part = yield body) {
 		hash = cuid()
-		s1 = sharp()
+		s1 = sharp().limitInputPixels(4000 * 4000)
 		s1 = part.pipe(s1)
 		p1 = s1.clone().resize(300).quality(95).toFile(tmpDirectory + hash + '.300.jpg')
 		p2 = s1.clone().resize(600).quality(95).toFile(tmpDirectory + hash + '.600.jpg')
@@ -145,17 +157,19 @@ router.post('/api/shots', function *(next) {
 	yield next
 	var db = this.db
 	var body = this.request.body
+	var hash = body.hash.replace(/\W/g, '').substr(0, 25)
+	var text = body.text.substr(0, 140)
 	var size = [300, 600, 1200]
 	var filename
 	for (var i = 0; i < size.length; i++) {
-		filename = body.hash + '.' + size[i] + '.jpg'
+		filename = hash + '.' + size[i] + '.jpg'
 		yield fs.rename(tmpDirectory + filename, uploadDirectory + filename)
 	}
 	var Shots = db.col('shots')
 	var now = new Date()
 	yield Shots.insert({
-		sid: body.hash
-		, text: body.text
+		sid: hash
+		, text: text
 		, created: now
 		, updated: now
 	})

@@ -6,7 +6,7 @@ Dropzone.autoDiscover = false
 $(document).ready(function() {
 	var dz = new Dropzone('#upload-dropzone', {
 		maxFilesize: 8
-		, acceptedFiles: 'image/png,image/jpeg,image/bmp,image/gif'
+		, acceptedFiles: 'image/png,image/jpeg'
 		, forceFallback: false
 		, maxFiles: 6
 		, thumbnailWidth: 80
