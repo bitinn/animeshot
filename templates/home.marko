@@ -19,7 +19,7 @@ html lang="zh-cn"
 			div class="main-search"
 				form action="/search" class="forms"
 					section
-						label for="search-field" - 搜索图片
+						label for="search-field" - 搜索图片文字
 						input type="search" name="q" id="search-field" value
 					section
 						button type="submit" - 出击吧，搜索君！
@@ -32,3 +32,12 @@ html lang="zh-cn"
 						section
 							button type="submit" - 为人民服务！
 				div class="upload-shot" id="upload-shot"
+		blocks cols="2" class="main"
+			for(shot in data.shots)
+				div class="main-preview"
+					a href="shots/${shot.sid}" class="preview-image"
+						img src="/upload/${shot.sid}.300.jpg" alt="300px"
+					blockquote class="preview-quote"
+						p - ${shot.text}
+						cite
+							a href="shots/${shot.sid}" - 链接

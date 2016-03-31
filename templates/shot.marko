@@ -13,18 +13,19 @@ html lang="zh-cn"
 			div class="main-search"
 				form action="/search" class="forms"
 					section
-						label for="search-field" - 搜索图片
+						label for="search-field" - 搜索图片文字
 						input type="search" name="q" id="search-field" value
 					section
 						button type="submit" - 出击吧，搜索君！
 		blocks cols="2" class="main"
 			div
+				h2 - 文字内容
 				p
 					a href="/shots/${data.sid}" - ${data.text}
 		blocks cols="2" class="main"
 			for(size in data.size)
 				div class="main-preview"
-					a href="${data.domain}/upload/${data.sid}.${size}.jpg" class="preview-image"
+					a href="/upload/${data.sid}.${size}.jpg" class="preview-image"
 						img src="/upload/${data.sid}.${size}.jpg" alt="${size}px"
 				div class="main-preview"
 					p class="bold" - ${size}px

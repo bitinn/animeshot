@@ -27,6 +27,7 @@ var searchTemplate = templateLoader('./search.marko')
 var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
 var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
+var siteDomain = 'https://as.bitinn.net'
 
 var app = koa()
 var router = routerFactory()
@@ -79,7 +80,13 @@ app.use(bodyParser())
 // home page
 router.get('/', function *(next) {
 	yield next
-	this.body = homeTemplate.renderSync()
+	var db = this.db
+	var Shots = db.col('shots')
+	var result = yield Shots.find().sort({ created: -1 }).limit(4)
+	var data = {
+		shots: result
+	}
+	this.body = homeTemplate.renderSync(data)
 })
 
 // shot page
@@ -92,7 +99,7 @@ router.get('/shots/:id', function *(next) {
 		text: shot.text
 		, sid: shot.sid
 		, size: ['300', '600', '1200']
-		, domain: 'http://example.com'
+		, domain: siteDomain
 	}
 	this.body = shotTemplate.renderSync(data)
 })
@@ -145,9 +152,12 @@ router.post('/api/shots', function *(next) {
 		yield fs.rename(tmpDirectory + filename, uploadDirectory + filename)
 	}
 	var Shots = db.col('shots')
+	var now = new Date()
 	yield Shots.insert({
 		sid: body.hash
 		, text: body.text
+		, created: now
+		, updated: now
 	})
 	this.body = 'done'
 })

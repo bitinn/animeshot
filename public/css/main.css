@@ -3,6 +3,10 @@
 	margin: 2em;
 }
 
+.main-preview {
+	overflow: hidden;
+}
+
 .preview-image {
 	display: block;
 	max-height: 200px;
