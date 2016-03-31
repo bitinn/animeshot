@@ -15,6 +15,13 @@ $(document).ready(function() {
 	})
 
 	dz.on('success', function(file, res, err) {
-		console.log(res)
+		var id = res
+		var name = 'shot-' + id
+		var selector = '#' + name
+		$('#upload-shot').append('<form method="post" action="/api/shots" id="' + name + '"></form>')
+		$(selector).append('<label for="' + name + '-text">请输入截图字幕内容</label>')
+		$(selector).append('<input type="hidden" name="hash" value="' + id + '">')
+		$(selector).append('<input type="text" name="text" id="' + name + '-text" value="">')
+		$(selector).append('<button type="submit">分享</button>')
 	})
 })
