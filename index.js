@@ -10,8 +10,8 @@
 var fs = require('mz/fs')
 var cuid = require('cuid')
 var sharp = require('sharp')
-var mime = require('mime-types')
 var busboy = require('co-busboy')
+var mimetypes = require('mime-types')
 var mongo = require('yieldb').connect
 var escapeString = require('escape-string-regexp')
 
@@ -133,8 +133,8 @@ router.post('/api/files', function *(next) {
 	var body = busboy(this, {
 		autoFields: true
 		, checkFile: function (fn, file, name, enc, mime) {
-			var ext = mime.extension(mime)
-			if (ext !== 'jpg' && ext !== 'png') {
+			var ext = mimetypes.extension(mime)
+			if (ext !== 'jpeg' && ext !== 'png') {
 				return new Error('file type not supported')
 			}
 		}
