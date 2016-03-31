@@ -117,7 +117,7 @@ router.get('/search', function *(next) {
 			text: {
 				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
 			}
-		})
+		}).sort({ created: -1 }).limit(20)
 	}
 	var data = {
 		shots: result
