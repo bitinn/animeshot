@@ -15,6 +15,10 @@
 	background-color: #fef9f7;
 }
 
+.dropzone .dz-preview {
+	background-color: transparent !important;
+}
+
 @media screen and (min-width: 700px) {
 	.main-upload, .main-search {
 		float: left;
