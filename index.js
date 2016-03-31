@@ -31,10 +31,10 @@ router.post('/api/files', function *(next) {
 	var body = busboy(this, {
 		autoFields: true
 	})
-	var hash = cuid()
-	var s1 = sharp()
-	var part, p1, p2, p3
+	var part, p1, p2, p3, hash, s1
 	while (part = yield body) {
+		hash = cuid()
+		s1 = sharp()
 		s1 = part.pipe(s1)
 		p1 = s1.clone().resize(300).quality(95).toFile(uploadDirectory + hash + '.300.jpg')
 		p2 = s1.clone().resize(600).quality(95).toFile(uploadDirectory + hash + '.600.jpg')

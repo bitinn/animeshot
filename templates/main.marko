@@ -6,11 +6,14 @@ html lang="zh-cn"
 		link rel="stylesheet" media="all" href="css/dropzone.css"
 		link rel="stylesheet" media="all" href="css/main.css"
 		script src="js/dropzone.js"
+		script src="js/domtastic.js"
+		script src="js/main.js"
 	body
 		div class="main-upload"
-			form action="api/files" class="dropzone"
+			form action="api/files" method="post" enctype="multipart/form-data" class="dropzone" id="upload-dropzone"
 				div class="fallback"
-					input name="file" type="file" multiple
+					input name="file" type="file"
+					button type="submit" - Upload
 		div class="main-search"
 			form action="api/search"
 				div class="search-box"
