@@ -9,7 +9,7 @@ An open and searchable image repository in Node.js
 
 - [x] Progressive upload
 - [x] Drag-n-drop upload
-- [ ] Image resize
+- [x] Image resize
 - [ ] Searchable text and source
 - [ ] OAuth
 - [ ] Rating

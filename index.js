@@ -15,6 +15,7 @@ var static = require('koa-static')
 var busboy = require('co-busboy')
 var templateLoader = require('./templates/marko-template-loader')
 var homeTemplate = templateLoader('./main.marko')
+var createStream = require('stream').PassThrough
 
 var uploadDirectory = 'upload-tmp/'
 
@@ -31,12 +32,16 @@ router.post('/api/files', function *(next) {
 		autoFields: true
 	})
 	var hash = cuid()
-	var name = uploadDirectory + hash + '.jpg'
-	var part
+	var s1 = sharp()
+	var part, p1, p2, p3
 	while (part = yield body) {
-		part.pipe(fs.createWriteStream(name))
+		s1 = part.pipe(s1)
+		p1 = s1.clone().resize(300).quality(95).toFile(uploadDirectory + hash + '.300.jpg')
+		p2 = s1.clone().resize(600).quality(95).toFile(uploadDirectory + hash + '.600.jpg')
+		p3 = s1.clone().resize(1200).quality(95).toFile(uploadDirectory + hash + '.1200.jpg')
+		yield Promise.all([p1, p2, p3])
 	}
-	this.body = 'done'
+	this.body = hash
 })
 
 app.use(logger())
