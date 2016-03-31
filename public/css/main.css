@@ -1,10 +1,22 @@
 
-.main-upload {
+.main-upload, .main-search, .main-shot {
 	padding: 2em;
 }
 
-.main-search {
-	padding: 2em;
+.shot-preview {
+	width: 300px;
+}
+
+.shot-preview-image {
+	width: 100%;
+}
+
+.shot-preview-text {
+	font-size: 1rem;
+}
+
+.shot-preview-url {
+	width: 100%;
 }
 
 .dropzone {

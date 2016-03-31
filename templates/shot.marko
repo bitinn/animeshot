@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+html lang="zh-cn"
+	head
+		title - ${data.text}
+		link rel="stylesheet" media="all" href="/css/normalize.css"
+		link rel="stylesheet" media="all" href="/css/main.css"
+	body
+		div class="main-shot"
+			for(size in data.size)
+				div class="shot-preview"
+					img src="/upload/${data.id}.${size}.jpg" alt="${size}px" class="shot-preview-image"
+					p class="shot-preview-text" - ${size}px
+					input type="text" value="${data.domain}/upload/${data.id}.${size}.jpg" class="shot-preview-url"

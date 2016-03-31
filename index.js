@@ -16,8 +16,6 @@ var bodyParser = require('koa-bodyparser');
 var routerFactory = require('koa-router')
 var staticFile = require('koa-static')
 var busboy = require('co-busboy')
-var templateLoader = require('./templates/marko-template-loader')
-var homeTemplate = templateLoader('./main.marko')
 var createStream = require('stream').PassThrough
 var mongo = require('yieldb').connect;
 
@@ -25,13 +23,31 @@ var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
 var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
 
+var templateLoader = require('./templates/marko-template-loader')
+var homeTemplate = templateLoader('./home.marko')
+var shotTemplate = templateLoader('./shot.marko')
+
 var app = koa()
 var router = routerFactory()
-var db
+var mongoConnection
 
 router.get('/', function *(next) {
 	yield next
 	this.body = homeTemplate.renderSync()
+})
+
+router.get('/shots/:id', function *(next) {
+	yield next
+	var db = this.db
+	var Shots = db.col('shots')
+	var shot = yield Shots.findOne({ sid: this.params.id })
+	var data = {
+		text: shot.text
+		, id: shot.sid
+		, size: ['300', '600', '1200']
+		, domain: 'http://example.com'
+	}
+	this.body = shotTemplate.renderSync(data)
 })
 
 router.post('/api/files', function *(next) {
@@ -54,6 +70,7 @@ router.post('/api/files', function *(next) {
 
 router.post('/api/shots', function *(next) {
 	yield next
+	var db = this.db
 	var body = this.request.body
 	var size = [300, 600, 1200]
 	var filename
@@ -61,6 +78,11 @@ router.post('/api/shots', function *(next) {
 		filename = body.hash + '.' + size[i] + '.jpg'
 		yield fs.rename(tmpDirectory + filename, uploadDirectory + filename)
 	}
+	var Shots = db.col('shots')
+	yield Shots.insert({
+		sid: body.hash
+		, text: body.text
+	})
 	this.body = 'done'
 })
 
@@ -71,10 +93,10 @@ app.use(staticFile('public', {
 
 app.use(function *(next) {
 	try {
-		if (!db) {
-			db = yield mongo(databaseUrl)
+		if (!mongoConnection) {
+			mongoConnection = yield mongo(databaseUrl)
 		}
-		this.db = db
+		this.db = mongoConnection
 	} catch(err) {
 		this.db = false
 		this.app.emit('error', err, this)
