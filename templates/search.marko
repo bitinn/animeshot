@@ -5,10 +5,24 @@ html lang="zh-cn"
 		link rel="stylesheet" media="all" href="/css/kube.css"
 		link rel="stylesheet" media="all" href="/css/main.css"
 	body
-		div class="main-search"
-			ul class="search-results"
-				for(shot in data.shots)
-					li class="result-preview"
-						a href="shots/${shot.sid}"
-							img src="/upload/${shot.sid}.300.jpg" alt="300px" class="shot-preview-image"
-							p class="shot-preview-text" - ${shot.text}
+		blocks cols="2" class="header"
+			div class="header-title"
+				h1
+					a href="/" - AnimeShot
+		blocks cols="2" class="main"
+			div class="main-search"
+				form action="/search" class="forms"
+					section
+						label for="search-field" - 搜索图片
+						input type="search" name="q" id="search-field" value="${data.q}"
+					section
+						button type="submit" - 出击吧，搜索君！
+		blocks cols="2" class="main"
+			for(shot in data.shots)
+				div class="main-preview"
+					a href="shots/${shot.sid}" class="preview-image"
+						img src="/upload/${shot.sid}.600.jpg" alt="600px"
+					blockquote class="preview-quote"
+						p - ${shot.text}
+						cite
+							a href="shots/${shot.sid}" - 链接

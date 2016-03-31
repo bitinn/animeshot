@@ -8,8 +8,10 @@ $(document).ready(function() {
 		maxFilesize: 8
 		, acceptedFiles: 'image/png,image/jpeg,image/bmp,image/gif'
 		, forceFallback: false
-		, maxFiles: 4
-		, dictDefaultMessage: '上传新图片（最多4张）'
+		, maxFiles: 6
+		, thumbnailWidth: 80
+		, thumbnailHeight: 80
+		, dictDefaultMessage: '上传新图片（最多6张）'
 		, dictInvalidFileType: '不支持这类图片'
 		, dictFileTooBig: '文件大小超过上限'
 		, dictResponseError: '服务器出错 >_<'

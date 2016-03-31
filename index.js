@@ -109,6 +109,7 @@ router.get('/search', function *(next) {
 	})
 	var data = {
 		shots: result
+		, q: this.query.q
 	}
 	this.body = searchTemplate.renderSync(data)
 })
