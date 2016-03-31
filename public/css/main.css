@@ -43,6 +43,10 @@
 	display: none;
 }
 
+.dropzone .dz-preview .dz-details .dz-size {
+	font-size: 0.75em;
+}
+
 .dropzone .dz-preview .dz-error-message {
 	top: 80px;
 }

@@ -46,7 +46,8 @@ $(document).ready(function() {
 			}).then(function(text) {
 				$('#' + name + '-label').html('成功添加')
 				$('#' + name + '-text').addClass('input-success')
-				$('#' + name + '-submit').attr('disabled', 'disabled')
+				$('#' + name + '-submit').remove()
+				$('#' + inner2).append('<a href="/shots/' + id + '" class="btn">访问链接</a>')
 			}).catch(function(err) {
 				console.log(err)
 			})
