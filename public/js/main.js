@@ -13,4 +13,8 @@ $(document).ready(function() {
 		, dictFileTooBig: '文件大小超过上限'
 		, dictResponseError: '服务器出错 >_<'
 	})
+
+	dz.on('success', function(file, res, err) {
+		console.log(res)
+	})
 })
