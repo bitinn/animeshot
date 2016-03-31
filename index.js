@@ -179,4 +179,8 @@ router.post('/api/shots', function *(next) {
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-app.listen(8080)
+if (app.env === 'dev') {
+	app.listen(8080)
+} else {
+	app.listen(8081)
+}
