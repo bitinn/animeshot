@@ -21,6 +21,10 @@ function *migration() {
 	}, {
 		unique: true
 	})
+
+	yield Shots.index({
+		created: -1
+	})
 };
 
 co(migration).then(function() {
