@@ -19,12 +19,15 @@ var busboy = require('co-busboy')
 var templateLoader = require('./templates/marko-template-loader')
 var homeTemplate = templateLoader('./main.marko')
 var createStream = require('stream').PassThrough
+var mongo = require('yieldb').connect;
 
 var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
+var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
 
 var app = koa()
 var router = routerFactory()
+var db
 
 router.get('/', function *(next) {
 	yield next
@@ -65,6 +68,38 @@ app.use(logger())
 app.use(staticFile('public', {
 	maxage: 1000 * 60 * 60 * 24
 }))
+
+app.use(function *(next) {
+	try {
+		if (!db) {
+			db = yield mongo(databaseUrl)
+		}
+		this.db = db
+	} catch(err) {
+		this.db = false
+		this.app.emit('error', err, this)
+	}
+
+	yield next
+})
+
+app.use(function *(next) {
+	if (this.db === false) {
+		this.status = 500
+		this.body = 'mongodb down'
+		return;
+	}
+
+	try {
+		yield next;
+	} catch (err) {
+		this.app.emit('error', err, this);
+		this.status = 500
+		this.body = 'internal error'
+		return;
+	}
+})
+
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
