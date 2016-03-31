@@ -29,7 +29,7 @@ router.post('/api/files', function *(next) {
 	var body = busboy(this, {
 		autoFields: true
 	})
-	var name = 'public/upload/' + cuid() + '.jpg'
+	var name = 'upload-tmp/' + cuid() + '.jpg'
 	var part
 	while (part = yield body) {
 		part.pipe(fs.createWriteStream(name))
