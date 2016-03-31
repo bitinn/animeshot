@@ -13,9 +13,10 @@ html lang="zh-cn"
 			form action="/api/files" method="post" enctype="multipart/form-data" class="dropzone" id="upload-dropzone"
 				div class="fallback"
 					input name="file" type="file"
-					button type="submit" - Upload
+					button type="submit" - 上传
 			div class="upload-shot" id="upload-shot"
 		div class="main-search"
-			form action="/api/search"
+			form action="/search"
 				div class="search-box"
-					input name="search" type="search" value
+					input type="search" name="q" value
+					button type="submit" - 搜索

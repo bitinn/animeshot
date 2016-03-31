@@ -13,7 +13,7 @@ function create(__helpers) {
 
     forEach(data.size, function(size) {
       out.w("<div class=\"shot-preview\"><img src=\"/upload/" +
-        escapeXmlAttr(data.id) +
+        escapeXmlAttr(data.sid) +
         "." +
         escapeXmlAttr(size) +
         ".jpg\" alt=\"" +
@@ -23,7 +23,7 @@ function create(__helpers) {
         "px</p><input type=\"text\" value=\"" +
         escapeXmlAttr(data.domain) +
         "/upload/" +
-        escapeXmlAttr(data.id) +
+        escapeXmlAttr(data.sid) +
         "." +
         escapeXmlAttr(size) +
         ".jpg\" class=\"shot-preview-url\"></div>");

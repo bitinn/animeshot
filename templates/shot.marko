@@ -8,6 +8,6 @@ html lang="zh-cn"
 		div class="main-shot"
 			for(size in data.size)
 				div class="shot-preview"
-					img src="/upload/${data.id}.${size}.jpg" alt="${size}px" class="shot-preview-image"
+					img src="/upload/${data.sid}.${size}.jpg" alt="${size}px" class="shot-preview-image"
 					p class="shot-preview-text" - ${size}px
-					input type="text" value="${data.domain}/upload/${data.id}.${size}.jpg" class="shot-preview-url"
+					input type="text" value="${data.domain}/upload/${data.sid}.${size}.jpg" class="shot-preview-url"

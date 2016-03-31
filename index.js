@@ -26,6 +26,7 @@ var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
 var templateLoader = require('./templates/marko-template-loader')
 var homeTemplate = templateLoader('./home.marko')
 var shotTemplate = templateLoader('./shot.marko')
+var searchTemplate = templateLoader('./search.marko')
 
 var app = koa()
 var router = routerFactory()
@@ -43,11 +44,26 @@ router.get('/shots/:id', function *(next) {
 	var shot = yield Shots.findOne({ sid: this.params.id })
 	var data = {
 		text: shot.text
-		, id: shot.sid
+		, sid: shot.sid
 		, size: ['300', '600', '1200']
 		, domain: 'http://example.com'
 	}
 	this.body = shotTemplate.renderSync(data)
+})
+
+router.get('/search', function *(next) {
+	yield next
+	var db = this.db
+	var Shots = db.col('shots')
+	var result = yield Shots.find({
+		text: {
+			$regex: new RegExp('(.*)' + this.query.q + '(.*)', 'i')
+		}
+	})
+	var data = {
+		shots: result
+	}
+	this.body = searchTemplate.renderSync(data)
 })
 
 router.post('/api/files', function *(next) {

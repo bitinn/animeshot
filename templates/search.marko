@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+html lang="zh-cn"
+	head
+		title - 搜索结果
+		link rel="stylesheet" media="all" href="/css/normalize.css"
+		link rel="stylesheet" media="all" href="/css/main.css"
+	body
+		div class="main-search"
+			ul class="search-results"
+				for(shot in data.shots)
+					li class="result-preview"
+						a href="shots/${shot.sid}"
+							img src="/upload/${shot.sid}.300.jpg" alt="300px" class="shot-preview-image"
+							p class="shot-preview-text" - ${shot.text}
