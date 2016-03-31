@@ -7,6 +7,7 @@
 
 var fs = require('fs')
 var cuid = require('cuid')
+var sharp = require('sharp')
 var koa = require('koa')
 var logger = require('koa-logger')
 var router = require('koa-router')()
@@ -15,13 +16,13 @@ var busboy = require('co-busboy')
 var templateLoader = require('./templates/marko-template-loader')
 var homeTemplate = templateLoader('./main.marko')
 
+var uploadDirectory = 'upload-tmp/'
+
 var app = koa()
 
 router.get('/', function *(next) {
 	yield next
-	this.body = homeTemplate.renderSync({
-		name: 'David Frank'
-	})
+	this.body = homeTemplate.renderSync()
 })
 
 router.post('/api/files', function *(next) {
@@ -29,7 +30,8 @@ router.post('/api/files', function *(next) {
 	var body = busboy(this, {
 		autoFields: true
 	})
-	var name = 'upload-tmp/' + cuid() + '.jpg'
+	var hash = cuid()
+	var name = uploadDirectory + hash + '.jpg'
 	var part
 	while (part = yield body) {
 		part.pipe(fs.createWriteStream(name))

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "NODE_ENV=dev nodemon --ext js,marko --ignore '*/*.marko.js' index.js"
+    "dev": "NODE_ENV=dev nodemon --ext js,marko --ignore '*/*.marko.js' index.js",
+    "purge": "find ./upload-tmp -maxdepth 1 -type f -not -name .gitignore -exec rm -fv {} + | wc -w"
   },
   "repository": {
     "type": "git",
