@@ -33,7 +33,11 @@ function create(__helpers) {
         "\">链接</a></cite></blockquote></div>");
     });
 
-    out.w("</blocks></body></html>");
+    out.w("</blocks>");
+
+    data.paging.render(data, out);
+
+    out.w("</body></html>");
   };
 }
 

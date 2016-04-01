@@ -17,7 +17,7 @@ var escapeString = require('escape-string-regexp')
 
 var koa = require('koa')
 var logger = require('koa-logger')
-var bodyParser = require('koa-bodyparser');
+var bodyParser = require('koa-bodyparser')
 var routerFactory = require('koa-router')
 var staticFile = require('koa-static')
 
@@ -29,6 +29,7 @@ var recentTemplate = templateLoader('./recent.marko')
 var analyticsTemplate = templateLoader('./analytics.marko')
 var headerTemplate = templateLoader('./header.marko')
 var searchBoxTemplate = templateLoader('./search-box.marko')
+var pagingTemplate = templateLoader('./paging.marko')
 
 var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
@@ -68,16 +69,16 @@ app.use(function *(next) {
 	if (this.db === false) {
 		this.status = 500
 		this.body = 'mongodb down'
-		return;
+		return
 	}
 
 	try {
-		yield next;
+		yield next
 	} catch (err) {
-		this.app.emit('error', err, this);
+		this.app.emit('error', err, this)
 		this.status = 500
 		this.body = 'internal error'
-		return;
+		return
 	}
 })
 
@@ -150,6 +151,31 @@ router.get('/recent', function *(next) {
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
+		, paging: pagingTemplate
+		, next: 2
+	}
+	this.body = recentTemplate.renderSync(data)
+})
+
+// recent paging
+router.get('/recent/page/:page', function *(next) {
+	yield next
+	var db = this.db
+	var page = parseInt(this.params.page, 10) || 1
+	if (page < 1) {
+		this.redirect('/recent')
+		return
+	}
+	var Shots = db.col('shots')
+	var result = yield Shots.find().sort({ created: -1 }).limit(20).skip((page - 1) * 20)
+	var data = {
+		shots: result
+		, analytics: analyticsTemplate
+		, header: headerTemplate
+		, searchBox: searchBoxTemplate
+		, paging: pagingTemplate
+		, prev: page - 1
+		, next: page + 1
 	}
 	this.body = recentTemplate.renderSync(data)
 })
