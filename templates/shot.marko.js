@@ -7,7 +7,11 @@ function create(__helpers) {
       forEach = __helpers.f;
 
   return function render(data, out) {
-    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>AnimeShot / " +
+    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head>");
+
+    data.meta.render({}, out);
+
+    out.w("<title>AnimeShot / " +
       escapeXml(data.text) +
       "</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\">");
 

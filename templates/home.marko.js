@@ -7,7 +7,11 @@ function create(__helpers) {
       escapeXmlAttr = __helpers.xa;
 
   return function render(data, out) {
-    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>AnimeShot / 截图吐槽 for everyone</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/dropzone.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"><script src=\"/js/dropzone.js\"></script><script src=\"/js/domtastic.js\"></script><script src=\"/js/fetch.js\"></script><script src=\"/js/form-serialize.js\"></script><script src=\"/js/main.js\"></script>");
+    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head>");
+
+    data.meta.render({}, out);
+
+    out.w("<title>AnimeShot / 截图吐槽 for everyone</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/dropzone.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"><script src=\"/js/dropzone.js\"></script><script src=\"/js/domtastic.js\"></script><script src=\"/js/fetch.js\"></script><script src=\"/js/form-serialize.js\"></script><script src=\"/js/main.js\"></script>");
 
     data.analytics.render({}, out);
 

@@ -30,6 +30,7 @@ var analyticsTemplate = templateLoader('./analytics.marko')
 var headerTemplate = templateLoader('./header.marko')
 var searchBoxTemplate = templateLoader('./search-box.marko')
 var pagingTemplate = templateLoader('./paging.marko')
+var commonMetaTemplate = templateLoader('./common-meta.marko')
 
 var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
@@ -95,6 +96,7 @@ router.get('/', function *(next) {
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
+		, meta: commonMetaTemplate
 	}
 	this.body = homeTemplate.renderSync(data)
 })
@@ -113,6 +115,7 @@ router.get('/shots/:id', function *(next) {
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
+		, meta: commonMetaTemplate
 	}
 	this.body = shotTemplate.renderSync(data)
 })
@@ -137,6 +140,7 @@ router.get('/search', function *(next) {
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
+		, meta: commonMetaTemplate
 		, next: 2
 		, page: 'search'
 	}
@@ -168,6 +172,7 @@ router.get('/search/page/:page', function *(next) {
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
+		, meta: commonMetaTemplate
 		, prev: page - 1
 		, next: page + 1
 		, page: 'search'
@@ -187,6 +192,7 @@ router.get('/recent', function *(next) {
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
+		, meta: commonMetaTemplate
 		, next: 2
 		, page: 'recent'
 	}
@@ -210,6 +216,7 @@ router.get('/recent/page/:page', function *(next) {
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
+		, meta: commonMetaTemplate
 		, prev: page - 1
 		, next: page + 1
 		, page: 'recent'

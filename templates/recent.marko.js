@@ -7,7 +7,11 @@ function create(__helpers) {
       escapeXmlAttr = __helpers.xa;
 
   return function render(data, out) {
-    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head><title>AnimeShot / 近期上传</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\">");
+    out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head>");
+
+    data.meta.render({}, out);
+
+    out.w("<title>AnimeShot / 近期上传</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\">");
 
     data.analytics.render({}, out);
 
