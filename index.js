@@ -36,6 +36,7 @@ var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
 var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
 var siteDomain = 'https://as.bitinn.net'
+var assetRevision = 'r2'
 
 var app = koa()
 var router = routerFactory()
@@ -97,6 +98,7 @@ router.get('/', function *(next) {
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
 		, meta: commonMetaTemplate
+		, rev: assetRevision
 	}
 	this.body = homeTemplate.renderSync(data)
 })
@@ -116,6 +118,7 @@ router.get('/shots/:id', function *(next) {
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
 		, meta: commonMetaTemplate
+		, rev: assetRevision
 	}
 	this.body = shotTemplate.renderSync(data)
 })
@@ -141,6 +144,7 @@ router.get('/search', function *(next) {
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
 		, meta: commonMetaTemplate
+		, rev: assetRevision
 		, next: 2
 		, page: 'search'
 	}
@@ -173,6 +177,7 @@ router.get('/search/page/:page', function *(next) {
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
 		, meta: commonMetaTemplate
+		, rev: assetRevision
 		, prev: page - 1
 		, next: page + 1
 		, page: 'search'
@@ -193,6 +198,7 @@ router.get('/recent', function *(next) {
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
 		, meta: commonMetaTemplate
+		, rev: assetRevision
 		, next: 2
 		, page: 'recent'
 	}
@@ -217,6 +223,7 @@ router.get('/recent/page/:page', function *(next) {
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
 		, meta: commonMetaTemplate
+		, rev: assetRevision
 		, prev: page - 1
 		, next: page + 1
 		, page: 'recent'

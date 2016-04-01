@@ -3,14 +3,14 @@ html lang="zh-cn"
 	head
 		include('${data.meta}')
 		title - AnimeShot / 截图吐槽 for everyone
-		link rel="stylesheet" media="all" href="/css/kube.css"
-		link rel="stylesheet" media="all" href="/css/dropzone.css"
-		link rel="stylesheet" media="all" href="/css/main.css"
-		script src="/js/dropzone.js"
-		script src="/js/domtastic.js"
-		script src="/js/fetch.js"
-		script src="/js/form-serialize.js"
-		script src="/js/main.js"
+		link rel="stylesheet" media="all" href="/css/kube.css?${data.rev}"
+		link rel="stylesheet" media="all" href="/css/dropzone.css?${data.rev}"
+		link rel="stylesheet" media="all" href="/css/main.css?${data.rev}"
+		script src="/js/dropzone.js?${data.rev}"
+		script src="/js/domtastic.js?${data.rev}"
+		script src="/js/fetch.js?${data.rev}"
+		script src="/js/form-serialize.js?${data.rev}"
+		script src="/js/main.js?${data.rev}"
 		include('${data.analytics}')
 	body
 		include('${data.header}')

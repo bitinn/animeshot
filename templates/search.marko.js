@@ -3,15 +3,19 @@ function create(__helpers) {
       empty = __helpers.e,
       notEmpty = __helpers.ne,
       escapeXml = __helpers.x,
-      forEach = __helpers.f,
-      escapeXmlAttr = __helpers.xa;
+      escapeXmlAttr = __helpers.xa,
+      forEach = __helpers.f;
 
   return function render(data, out) {
     out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head>");
 
     data.meta.render({}, out);
 
-    out.w("<title>AnimeShot / 搜索结果</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\">");
+    out.w("<title>AnimeShot / 搜索结果</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css?" +
+      escapeXmlAttr(data.rev) +
+      "\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css?" +
+      escapeXmlAttr(data.rev) +
+      "\">");
 
     data.analytics.render({}, out);
 

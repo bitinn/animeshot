@@ -13,7 +13,11 @@ function create(__helpers) {
 
     out.w("<title>AnimeShot / " +
       escapeXml(data.text) +
-      "</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\">");
+      "</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css?" +
+      escapeXmlAttr(data.rev) +
+      "\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css?" +
+      escapeXmlAttr(data.rev) +
+      "\">");
 
     data.analytics.render({}, out);
 

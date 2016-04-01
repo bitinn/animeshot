@@ -3,15 +3,31 @@ function create(__helpers) {
       empty = __helpers.e,
       notEmpty = __helpers.ne,
       escapeXml = __helpers.x,
-      forEach = __helpers.f,
-      escapeXmlAttr = __helpers.xa;
+      escapeXmlAttr = __helpers.xa,
+      forEach = __helpers.f;
 
   return function render(data, out) {
     out.w("<!DOCTYPE html><html lang=\"zh-cn\"><head>");
 
     data.meta.render({}, out);
 
-    out.w("<title>AnimeShot / 截图吐槽 for everyone</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/dropzone.css\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css\"><script src=\"/js/dropzone.js\"></script><script src=\"/js/domtastic.js\"></script><script src=\"/js/fetch.js\"></script><script src=\"/js/form-serialize.js\"></script><script src=\"/js/main.js\"></script>");
+    out.w("<title>AnimeShot / 截图吐槽 for everyone</title><link rel=\"stylesheet\" media=\"all\" href=\"/css/kube.css?" +
+      escapeXmlAttr(data.rev) +
+      "\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/dropzone.css?" +
+      escapeXmlAttr(data.rev) +
+      "\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css?" +
+      escapeXmlAttr(data.rev) +
+      "\"><script src=\"/js/dropzone.js?" +
+      escapeXmlAttr(data.rev) +
+      "\"></script><script src=\"/js/domtastic.js?" +
+      escapeXmlAttr(data.rev) +
+      "\"></script><script src=\"/js/fetch.js?" +
+      escapeXmlAttr(data.rev) +
+      "\"></script><script src=\"/js/form-serialize.js?" +
+      escapeXmlAttr(data.rev) +
+      "\"></script><script src=\"/js/main.js?" +
+      escapeXmlAttr(data.rev) +
+      "\"></script>");
 
     data.analytics.render({}, out);
 
