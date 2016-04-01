@@ -1,4 +1,9 @@
 div class="group main"
-	a if(data.prev > 1) href="/recent/page/${data.prev}" class="btn left" - 上一页
-	a if(data.prev === 1) href="/recent" class="btn left" - 上一页
-	a href="/recent/page/${data.next}" class="btn right" - 下一页
+	if(data.q)
+		a if(data.prev > 1) href="/${data.page}/page/${data.prev}?q=${data.q}" class="btn left" - 上一页
+		a if(data.prev === 1) href="/${data.page}?q=${data.q}" class="btn left" - 上一页
+		a href="/${data.page}/page/${data.next}?q=${data.q}" class="btn right" - 下一页
+	else
+		a if(data.prev > 1) href="/${data.page}/page/${data.prev}" class="btn left" - 上一页
+		a if(data.prev === 1) href="/${data.page}" class="btn left" - 上一页
+		a href="/${data.page}/page/${data.next}" class="btn right" - 下一页

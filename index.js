@@ -136,6 +136,41 @@ router.get('/search', function *(next) {
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
+		, paging: pagingTemplate
+		, next: 2
+		, page: 'search'
+	}
+	this.body = searchTemplate.renderSync(data)
+})
+
+// search paging
+router.get('/search/page/:page', function *(next) {
+	yield next
+	var db = this.db
+	var page = parseInt(this.params.page, 10) || 1
+	if (page < 1) {
+		this.redirect('/recent')
+		return
+	}
+	var Shots = db.col('shots')
+	var result
+	if (this.query.q.length > 0 && this.query.q.length < 100) {
+		result = yield Shots.find({
+			text: {
+				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+			}
+		}).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
+	}
+	var data = {
+		shots: result
+		, q: this.query.q
+		, analytics: analyticsTemplate
+		, header: headerTemplate
+		, searchBox: searchBoxTemplate
+		, paging: pagingTemplate
+		, prev: page - 1
+		, next: page + 1
+		, page: 'search'
 	}
 	this.body = searchTemplate.renderSync(data)
 })
@@ -153,6 +188,7 @@ router.get('/recent', function *(next) {
 		, searchBox: searchBoxTemplate
 		, paging: pagingTemplate
 		, next: 2
+		, page: 'recent'
 	}
 	this.body = recentTemplate.renderSync(data)
 })
@@ -176,6 +212,7 @@ router.get('/recent/page/:page', function *(next) {
 		, paging: pagingTemplate
 		, prev: page - 1
 		, next: page + 1
+		, page: 'recent'
 	}
 	this.body = recentTemplate.renderSync(data)
 })
