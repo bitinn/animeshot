@@ -13,10 +13,10 @@ html lang="zh-cn"
 		blocks cols="2" class="main"
 			for(shot in data.shots)
 				div class="main-preview"
-					a href="shots/${shot.sid}" class="preview-image"
+					a href="/shots/${shot.sid}" class="preview-image"
 						img src="/upload/${shot.sid}.300.jpg" alt="300px"
 					blockquote class="preview-quote"
 						p - ${shot.text}
 						cite
-							a href="shots/${shot.sid}" - 链接
+							a href="/shots/${shot.sid}" - 链接
 		include('${data.paging}', data)

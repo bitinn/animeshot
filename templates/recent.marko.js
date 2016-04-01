@@ -30,13 +30,13 @@ function create(__helpers) {
     out.w("</blocks><blocks cols=\"2\" class=\"main\">");
 
     forEach(data.shots, function(shot) {
-      out.w("<div class=\"main-preview\"><a href=\"shots/" +
+      out.w("<div class=\"main-preview\"><a href=\"/shots/" +
         escapeXmlAttr(shot.sid) +
         "\" class=\"preview-image\"><img src=\"/upload/" +
         escapeXmlAttr(shot.sid) +
         ".300.jpg\" alt=\"300px\"></a><blockquote class=\"preview-quote\"><p>" +
         escapeXml(shot.text) +
-        "</p><cite><a href=\"shots/" +
+        "</p><cite><a href=\"/shots/" +
         escapeXmlAttr(shot.sid) +
         "\">链接</a></cite></blockquote></div>");
     });
