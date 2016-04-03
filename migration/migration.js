@@ -6,8 +6,9 @@
  */
 
 var co = require('co')
+var mongo = require('yieldb').connect
+
 var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
-var mongo = require('yieldb').connect;
 
 function *migration() {
 	console.log('migration started')
@@ -25,7 +26,7 @@ function *migration() {
 	yield Shots.index({
 		created: -1
 	})
-};
+}
 
 co(migration).then(function() {
 	console.log('migration done')
@@ -33,4 +34,4 @@ co(migration).then(function() {
 }).catch(function(err) {
 	console.error(err.stack)
 	process.exit()
-});
+})

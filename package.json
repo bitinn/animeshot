@@ -9,7 +9,8 @@
     "migration": "node migration/migration.js",
     "dev": "NODE_ENV=dev nodemon --ext js,marko --ignore '*/*.marko.js' index.js",
     "purge": "find ./upload-tmp -maxdepth 1 -type f -not -name .gitignore -exec rm -fv {} + | wc -w",
-    "cleanup": "find ./upload-tmp -maxdepth 1 -type f -mtime +7 -not -name .gitignore -exec rm -fv {} + | wc -w"
+    "cleanup": "find ./upload-tmp -maxdepth 1 -type f -mtime +7 -not -name .gitignore -exec rm -fv {} + | wc -w",
+    "delete:shot": "node command/delete-shot.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "koa-static": "^2.0.0",
     "marko": "^3.0.3",
     "mime-types": "^2.1.10",
+    "minimist": "^1.2.0",
     "mz": "^2.4.0",
     "purest": "^2.0.1",
     "redis": "^2.5.3",
