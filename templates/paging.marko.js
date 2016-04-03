@@ -27,13 +27,15 @@ function create(__helpers) {
           "\" class=\"btn left\">上一页</a>");
       }
 
-      out.w("<a href=\"/" +
-        escapeXmlAttr(data.page) +
-        "/page/" +
-        escapeXmlAttr(data.next) +
-        "?q=" +
-        escapeXmlAttr(data.q) +
-        "\" class=\"btn right\">下一页</a>");
+      if (data.next > 1) {
+        out.w("<a href=\"/" +
+          escapeXmlAttr(data.page) +
+          "/page/" +
+          escapeXmlAttr(data.next) +
+          "?q=" +
+          escapeXmlAttr(data.q) +
+          "\" class=\"btn right\">下一页</a>");
+      }
     } else {
       if (data.prev > 1) {
         out.w("<a href=\"/" +
@@ -49,11 +51,13 @@ function create(__helpers) {
           "\" class=\"btn left\">上一页</a>");
       }
 
-      out.w("<a href=\"/" +
-        escapeXmlAttr(data.page) +
-        "/page/" +
-        escapeXmlAttr(data.next) +
-        "\" class=\"btn right\">下一页</a>");
+      if (data.next > 1) {
+        out.w("<a href=\"/" +
+          escapeXmlAttr(data.page) +
+          "/page/" +
+          escapeXmlAttr(data.next) +
+          "\" class=\"btn right\">下一页</a>");
+      }
     }
 
     out.w("</div>");

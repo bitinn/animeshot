@@ -145,7 +145,7 @@ router.get('/search', function *(next) {
 		, paging: pagingTemplate
 		, meta: commonMetaTemplate
 		, rev: assetRevision
-		, next: 2
+		, next: result.length === 20 ? 2 : 1
 		, page: 'search'
 	}
 	this.body = searchTemplate.renderSync(data)
@@ -179,7 +179,7 @@ router.get('/search/page/:page', function *(next) {
 		, meta: commonMetaTemplate
 		, rev: assetRevision
 		, prev: page - 1
-		, next: page + 1
+		, next: result.length === 20 ? page + 1 : 1
 		, page: 'search'
 	}
 	this.body = searchTemplate.renderSync(data)
@@ -199,7 +199,7 @@ router.get('/recent', function *(next) {
 		, paging: pagingTemplate
 		, meta: commonMetaTemplate
 		, rev: assetRevision
-		, next: 2
+		, next: result.length === 20 ? 2 : 1
 		, page: 'recent'
 	}
 	this.body = recentTemplate.renderSync(data)
@@ -225,7 +225,7 @@ router.get('/recent/page/:page', function *(next) {
 		, meta: commonMetaTemplate
 		, rev: assetRevision
 		, prev: page - 1
-		, next: page + 1
+		, next: result.length === 20 ? page + 1 : 1
 		, page: 'recent'
 	}
 	this.body = recentTemplate.renderSync(data)
