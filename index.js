@@ -109,6 +109,10 @@ router.get('/shots/:id', function *(next) {
 	var db = this.db
 	var Shots = db.col('shots')
 	var shot = yield Shots.findOne({ sid: this.params.id })
+	if (!shot) {
+		this.redirect('/')
+		return
+	}
 	var data = {
 		text: shot.text
 		, sid: shot.sid
