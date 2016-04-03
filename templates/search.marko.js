@@ -43,7 +43,9 @@ function create(__helpers) {
 
     out.w("</blocks>");
 
-    data.paging.render(data, out);
+    if (notEmpty(data.shots)) {
+      data.paging.render(data, out);
+    }
 
     out.w("</body></html>");
   };
