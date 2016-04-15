@@ -300,6 +300,9 @@ router.get('/api/search', function *(next) {
 	}
 	var data = results.map (function (shot) {
 		delete shot._id
+		var sid = shot.sid
+		shot["thumb_url"] = "/upload/" + sid + ".300.jpg"
+		shot["photo_url"] = "/upload/" + sid + ".1200.jpg"
 		return shot
 	})
 	this.body = data
@@ -313,6 +316,9 @@ router.get('/api/recent', function *(next) {
 	var result = yield Shots.find().sort({ created: -1 }).limit(20).skip((page - 1) * 20)
 	var data = result.map(function (shot) {
 		delete shot._id
+		var sid = shot.sid
+		shot["thumb_url"] = "/upload/" + sid + ".300.jpg"
+		shot["photo_url"] = "/upload/" + sid + ".1200.jpg"
 		return shot
 	})
 	this.body = data
