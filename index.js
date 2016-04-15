@@ -291,11 +291,12 @@ router.get('/api/search', function *(next) {
 	var Shots = db.col('shots')
 	var results
 	if (this.query.q.length > 0 && this.query.q.length < 100) {
+		var page = parseInt(this.query.page, 10) || 1
 		results = yield Shots.find({
 			text: {
 				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
 			}
-		}).sort({ created: -1 }).limit(20)
+		}).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
 	}
 	var data = results.map (function (shot) {
 		delete shot._id
@@ -308,7 +309,8 @@ router.get('/api/recent', function *(next) {
 	yield next
 	var db = this.db
 	var Shots = db.col('shots')
-	var result = yield Shots.find().sort({ created: -1 }).limit(20)
+	var page = parseInt(this.query.page, 10) || 1
+	var result = yield Shots.find().sort({ created: -1 }).limit(20).skip((page - 1) * 20)
 	var data = result.map(function (shot) {
 		delete shot._id
 		return shot
