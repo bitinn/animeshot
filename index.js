@@ -285,6 +285,37 @@ router.post('/api/shots', function *(next) {
 	this.body = 'done'
 })
 
+router.get('/api/search', function *(next) {
+	yield next
+	var db = this.db
+	var Shots = db.col('shots')
+	var results
+	if (this.query.q.length > 0 && this.query.q.length < 100) {
+		results = yield Shots.find({
+			text: {
+				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+			}
+		}).sort({ created: -1 }).limit(20)
+	}
+	var data = results.map (function (shot) {
+		delete shot._id
+		return shot
+	})
+	this.body = data
+})
+
+router.get('/api/recent', function *(next) {
+	yield next
+	var db = this.db
+	var Shots = db.col('shots')
+	var result = yield Shots.find().sort({ created: -1 }).limit(20)
+	var data = result.map(function (shot) {
+		delete shot._id
+		return shot
+	})
+	this.body = data
+})
+
 app.use(router.routes())
 app.use(router.allowedMethods())
 
