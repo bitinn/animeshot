@@ -2,7 +2,7 @@
 AnimeShot
 =========
 
-An open and searchable image repository in Node.js (WIP)
+An open and searchable image repository in Node.js (WIP, but [live](https://as.bitinn.net/))
 
 
 ## Features
