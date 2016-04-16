@@ -132,8 +132,8 @@ router.get('/search', function *(next) {
 	yield next
 	var db = this.db
 	var Shots = db.col('shots')
-	var result
-	if (this.query.q.length > 0 && this.query.q.length < 100) {
+	var result = []
+	if (!!this.query.q && this.query.q.length > 0 && this.query.q.length < 100) {
 		result = yield Shots.find({
 			text: {
 				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
@@ -165,8 +165,8 @@ router.get('/search/page/:page', function *(next) {
 		return
 	}
 	var Shots = db.col('shots')
-	var result
-	if (this.query.q.length > 0 && this.query.q.length < 100) {
+	var result = []
+	if (!!this.query.q && this.query.q.length > 0 && this.query.q.length < 100) {
 		result = yield Shots.find({
 			text: {
 				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
@@ -288,23 +288,22 @@ router.post('/api/shots', function *(next) {
 router.get('/api/shots', function *(next) {
 	yield next
 	var db = this.db
+	var page = parseInt(this.query.page, 10) > 1 ? parseInt(this.query.page, 10) : 1
 	var Shots = db.col('shots')
+	var search = {}
 	var result
-	var page = parseInt(this.query.page, 10) || 1
-	if (typeof(this.query.q) != "undefined" && this.query.q.length > 0 && this.query.q.length < 100) {
-		result = yield Shots.find({
-			text: {
-				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
-			}
-		}).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
-	} else {
-		result = yield Shots.find().sort({ created: -1 }).limit(20).skip((page - 1) * 20)
+	if (!!this.query.q && this.query.q.length > 0 && this.query.q.length < 100) {
+		search.text = {
+			$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+		}
 	}
-	var data = result.map (function (shot) {
+	result = yield Shots.find(search).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
+	var data = result.map(function (shot) {
 		delete shot._id
-		var sid = shot.sid
-		shot["thumb_url"] = "/upload/" + sid + ".300.jpg"
-		shot["photo_url"] = "/upload/" + sid + ".1200.jpg"
+		shot.url = siteDomain + '/shots/' + shot.sid
+		shot.image_thumbnail = siteDomain + '/upload/' + shot.sid + '.300.jpg'
+		shot.image_preview = siteDomain + '/upload/' + shot.sid + '.600.jpg'
+		shot.image_large = siteDomain + '/upload/' + shot.sid + '.1200.jpg'
 		return shot
 	})
 	this.body = data
