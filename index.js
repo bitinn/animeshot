@@ -285,6 +285,31 @@ router.post('/api/shots', function *(next) {
 	this.body = 'done'
 })
 
+router.get('/api/shots', function *(next) {
+	yield next
+	var db = this.db
+	var Shots = db.col('shots')
+	var result
+	var page = parseInt(this.query.page, 10) || 1
+	if (typeof(this.query.q) != "undefined" && this.query.q.length > 0 && this.query.q.length < 100) {
+		result = yield Shots.find({
+			text: {
+				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+			}
+		}).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
+	} else {
+		result = yield Shots.find().sort({ created: -1 }).limit(20).skip((page - 1) * 20)
+	}
+	var data = result.map (function (shot) {
+		delete shot._id
+		var sid = shot.sid
+		shot["thumb_url"] = "/upload/" + sid + ".300.jpg"
+		shot["photo_url"] = "/upload/" + sid + ".1200.jpg"
+		return shot
+	})
+	this.body = data
+})
+
 app.use(router.routes())
 app.use(router.allowedMethods())
 
