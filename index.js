@@ -36,7 +36,7 @@ var tmpDirectory = 'upload-tmp/'
 var uploadDirectory = 'public/upload/'
 var databaseUrl = 'mongodb://localhost:27017/animeshot?w=1'
 var siteDomain = 'https://as.bitinn.net'
-var assetRevision = 'r2'
+var assetRevision = 'r3'
 
 var app = koa()
 var router = routerFactory()
