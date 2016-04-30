@@ -1,4 +1,12 @@
 
+body {
+	font-family: "Avenir Next", "Segoe UI", "Roboto", "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Hiragino Sans GB", "Microsoft YaHei UI", sans-serif;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
 .header, .main {
 	margin: 2em;
 }
