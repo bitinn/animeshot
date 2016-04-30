@@ -5,7 +5,7 @@ function create(__helpers) {
       escapeXml = __helpers.x;
 
   return function render(data, out) {
-    out.w("<blocks cols=\"2\" class=\"header\"><div class=\"header-title\"><h1><a href=\"/\">AnimeShot</a></h1></div><div class=\"header-description\"><p>本站仅收集高质的吐槽向的「动画字幕截图」，用于广大群众的搜索与吐槽之需。非动画、低分辨、无字幕的截图请不要上传，会被管理员删除。</p></div></blocks>");
+    out.w("<blocks cols=\"2\" class=\"header\"><div class=\"header-title\"><h1><a href=\"/\">AnimeShot</a></h1></div><div class=\"header-description\"><p>本站仅收集高质的吐槽向的「动画字幕截图」，用于广大群众的搜索与吐槽之需。 <strong>非动画、低分辨、无字幕</strong>的截图请不要上传，会被管理员删除。疑问与建议请到 <a href=\"https://github.com/bitinn/animeshot/issues\">这里反馈</a>。</p></div></blocks>");
   };
 }
 
