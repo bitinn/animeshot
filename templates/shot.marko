@@ -5,6 +5,11 @@ html lang="zh-cn"
 		title - AnimeShot / ${data.text}
 		link rel="stylesheet" media="all" href="/css/kube.css?${data.rev}"
 		link rel="stylesheet" media="all" href="/css/main.css?${data.rev}"
+		meta name="twitter:card" content="summary_large_image"
+		meta name="twitter:site" content="@bitinn"
+		meta name="twitter:title" content="${data.text}"
+		meta name="twitter:description" content="AnimeShot / 高质的吐槽向的「动画字幕截图」"
+		meta name="twitter:image" content="${data.domain}/upload/${data.sid}.1200.jpg"
 		include('${data.analytics}')
 	body
 		include('${data.header}')

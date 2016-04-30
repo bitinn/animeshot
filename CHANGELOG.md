@@ -8,6 +8,8 @@ Changelog
 ## v0.1.2 (master)
 
 - Template update, linking to repo
+- Nicer text rendering
+- Basic twitter card support
 
 ## v0.1.1
 

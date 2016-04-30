@@ -4,6 +4,7 @@ function create(__helpers) {
       notEmpty = __helpers.ne,
       escapeXml = __helpers.x,
       escapeXmlAttr = __helpers.xa,
+      attr = __helpers.a,
       forEach = __helpers.f;
 
   return function render(data, out) {
@@ -17,7 +18,13 @@ function create(__helpers) {
       escapeXmlAttr(data.rev) +
       "\"><link rel=\"stylesheet\" media=\"all\" href=\"/css/main.css?" +
       escapeXmlAttr(data.rev) +
-      "\">");
+      "\"><meta name=\"twitter:card\" content=\"summary_large_image\"><meta name=\"twitter:site\" content=\"@bitinn\"><meta name=\"twitter:title\"" +
+      attr("content", data.text) +
+      "><meta name=\"twitter:description\" content=\"AnimeShot / 高质的吐槽向的「动画字幕截图」\"><meta name=\"twitter:image\" content=\"" +
+      escapeXmlAttr(data.domain) +
+      "/upload/" +
+      escapeXmlAttr(data.sid) +
+      ".1200.jpg\">");
 
     data.analytics.render({}, out);
 
