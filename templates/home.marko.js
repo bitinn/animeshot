@@ -50,7 +50,11 @@ function create(__helpers) {
         escapeXml(shot.text) +
         "</p><cite><a href=\"shots/" +
         escapeXmlAttr(shot.sid) +
-        "\">链接</a></cite></blockquote></div>");
+        "\">图片页面</a> <a rel=\"nofollow\" href=\"https://whatanime.ga/?url=" +
+        escapeXmlAttr(data.domain) +
+        "/upload/" +
+        escapeXmlAttr(shot.sid) +
+        ".600.jpg\">查找出处</a></cite></blockquote></div>");
     });
 
     out.w("<div><p><a href=\"/recent\" class=\"btn\">更多近期上传</a></p></div></blocks></body></html>");

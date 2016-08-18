@@ -36,11 +36,13 @@ function create(__helpers) {
 
     data.searchBox.render({}, out);
 
-    out.w("</blocks><blocks cols=\"2\" class=\"main\"><div><h2>文字内容</h2><p><a href=\"/shots/" +
-      escapeXmlAttr(data.sid) +
-      "\">" +
+    out.w("</blocks><blocks cols=\"2\" class=\"main\"><div><h2>文字内容</h2><p>" +
       escapeXml(data.text) +
-      "</a></p></div></blocks><blocks cols=\"2\" class=\"main\">");
+      " - <a rel=\"nofollow\" href=\"https://whatanime.ga/?url=" +
+      escapeXmlAttr(data.domain) +
+      "/upload/" +
+      escapeXmlAttr(data.sid) +
+      ".600.jpg\">查找出处</a></p></div></blocks><blocks cols=\"2\" class=\"main\">");
 
     forEach(data.size, function(size) {
       out.w("<div class=\"main-preview\"><a href=\"/upload/" +

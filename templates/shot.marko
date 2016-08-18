@@ -19,7 +19,8 @@ html lang="zh-cn"
 			div
 				h2 - 文字内容
 				p
-					a href="/shots/${data.sid}" - ${data.text}
+					- ${data.text} - 
+					a rel="nofollow" href="https://whatanime.ga/?url=${data.domain}/upload/${data.sid}.600.jpg" - 查找出处
 		blocks cols="2" class="main"
 			for(size in data.size)
 				div class="main-preview"

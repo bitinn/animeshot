@@ -94,6 +94,7 @@ router.get('/', function *(next) {
 	var result = yield Shots.find().sort({ created: -1 }).limit(4)
 	var data = {
 		shots: result
+		, domain: siteDomain
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
