@@ -9,7 +9,7 @@ Changelog
 
 - Fix: search and recent page should also contain search link
 
-## v0.1.3 (master)
+## v0.1.3
 
 - Added search link for screenshot
 
