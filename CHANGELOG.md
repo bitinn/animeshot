@@ -11,17 +11,17 @@ Changelog
 
 ## v0.1.3
 
-- Added search link for screenshot
+- Feature: Added search link for screenshot
 
 ## v0.1.2
 
-- Template update, linking to repo
-- Nicer text rendering
-- Basic twitter card support
+- Feature: Template update, linking to repo
+- Feature: Nicer text rendering
+- Feature: Basic twitter card support
 
 ## v0.1.1
 
-- Add JSON api for shots searching, useful for telegram bot etc.
+- Feature: Add JSON api for shots searching, useful for telegram bot etc.
 
 ## v0.1.0
 
