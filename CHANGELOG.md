@@ -5,7 +5,11 @@ Changelog
 
 # 0.x release
 
-## v0.1.2 (master)
+## v0.1.3 (master)
+
+- Added search link for screenshot
+
+## v0.1.2
 
 - Template update, linking to repo
 - Nicer text rendering
