@@ -144,6 +144,7 @@ router.get('/search', function *(next) {
 	var data = {
 		shots: result
 		, q: this.query.q
+		, domain: siteDomain
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
@@ -177,6 +178,7 @@ router.get('/search/page/:page', function *(next) {
 	var data = {
 		shots: result
 		, q: this.query.q
+		, domain: siteDomain
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
@@ -198,6 +200,7 @@ router.get('/recent', function *(next) {
 	var result = yield Shots.find().sort({ created: -1 }).limit(20)
 	var data = {
 		shots: result
+		, domain: siteDomain
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate
@@ -223,6 +226,7 @@ router.get('/recent/page/:page', function *(next) {
 	var result = yield Shots.find().sort({ created: -1 }).limit(20).skip((page - 1) * 20)
 	var data = {
 		shots: result
+		, domain: siteDomain
 		, analytics: analyticsTemplate
 		, header: headerTemplate
 		, searchBox: searchBoxTemplate

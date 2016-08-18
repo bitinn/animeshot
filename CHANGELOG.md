@@ -5,6 +5,10 @@ Changelog
 
 # 0.x release
 
+## v0.1.4 (master)
+
+- Fix: search and recent page should also contain search link
+
 ## v0.1.3 (master)
 
 - Added search link for screenshot

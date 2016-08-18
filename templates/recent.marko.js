@@ -36,9 +36,13 @@ function create(__helpers) {
         escapeXmlAttr(shot.sid) +
         ".300.jpg\" alt=\"300px\"></a><blockquote class=\"preview-quote\"><p>" +
         escapeXml(shot.text) +
-        "</p><cite><a href=\"/shots/" +
+        "</p><cite><a href=\"shots/" +
         escapeXmlAttr(shot.sid) +
-        "\">链接</a></cite></blockquote></div>");
+        "\">图片页面</a> <a rel=\"nofollow\" href=\"https://whatanime.ga/?url=" +
+        escapeXmlAttr(data.domain) +
+        "/upload/" +
+        escapeXmlAttr(shot.sid) +
+        ".600.jpg\">查找出处</a></cite></blockquote></div>");
     });
 
     out.w("</blocks>");
