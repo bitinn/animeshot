@@ -5,7 +5,11 @@ Changelog
 
 # 0.x release
 
-## v0.1.4 (master)
+## v0.1.5
+
+- Enhance: search term is now tokenize into pinyin so that simplified and traditional chinese are both supported
+
+## v0.1.4
 
 - Fix: search and recent page should also contain search link
 
