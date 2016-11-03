@@ -14,6 +14,7 @@ var busboy = require('co-busboy')
 var mimetypes = require('mime-types')
 var mongo = require('yieldb').connect
 var escapeString = require('escape-string-regexp')
+var pinyin = require('pinyin')
 
 var koa = require('koa')
 var logger = require('koa-logger')
@@ -135,9 +136,11 @@ router.get('/search', function *(next) {
 	var Shots = db.col('shots')
 	var result = []
 	if (!!this.query.q && this.query.q.length > 0 && this.query.q.length < 100) {
+		var normalized = [].concat.apply([], pinyin(this.query.q))
+
 		result = yield Shots.find({
-			text: {
-				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+			normalized: {
+				$regex: new RegExp('(.*)' + escapeString(normalized.join(' ')) + '(.*)', 'i')
 			}
 		}).sort({ created: -1 }).limit(20)
 	}
@@ -169,9 +172,11 @@ router.get('/search/page/:page', function *(next) {
 	var Shots = db.col('shots')
 	var result = []
 	if (!!this.query.q && this.query.q.length > 0 && this.query.q.length < 100) {
+		var normalized = [].concat.apply([], pinyin(this.query.q))
+
 		result = yield Shots.find({
-			text: {
-				$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+			normalized: {
+				$regex: new RegExp('(.*)' + escapeString(normalized.join(' ')) + '(.*)', 'i')
 			}
 		}).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
 	}
@@ -273,6 +278,7 @@ router.post('/api/shots', function *(next) {
 	var body = this.request.body
 	var hash = body.hash.replace(/\W/g, '').substr(0, 25)
 	var text = body.text.substr(0, 140)
+	var normalized = [].concat.apply([], pinyin(text))
 	var size = [300, 600, 1200]
 	var filename
 	for (var i = 0; i < size.length; i++) {
@@ -284,6 +290,7 @@ router.post('/api/shots', function *(next) {
 	yield Shots.insert({
 		sid: hash
 		, text: text
+		, normalized: normalized.join(' ')
 		, created: now
 		, updated: now
 	})
@@ -298,8 +305,10 @@ router.get('/api/shots', function *(next) {
 	var search = {}
 	var result
 	if (!!this.query.q && this.query.q.length > 0 && this.query.q.length < 100) {
-		search.text = {
-			$regex: new RegExp('(.*)' + escapeString(this.query.q) + '(.*)', 'i')
+		var normalized = [].concat.apply([], pinyin(this.query.q))
+
+		search.normalized = {
+			$regex: new RegExp('(.*)' + escapeString(normalized.join(' ')) + '(.*)', 'i')
 		}
 	}
 	result = yield Shots.find(search).sort({ created: -1 }).limit(20).skip((page - 1) * 20)
