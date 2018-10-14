@@ -1,5 +1,5 @@
 
-**(Important Note: [AnimeShot2](https://github.com/bitinn/animeshot2) is out, this codebase is now deprecated.)
+**(Important Note: [AnimeShot2](https://github.com/bitinn/animeshot2) is out, this codebase is now deprecated.)**
 
 AnimeShot
 =========
